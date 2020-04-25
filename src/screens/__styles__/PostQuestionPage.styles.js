@@ -112,13 +112,30 @@ export const AnswersContainer = styled.div`
 `
 
 export const AnswerTag = styled.div`
-  border: 1px solid;
-  padding: .3em .5em;
   color: #FFF;
   margin-right: ${({ theme }) => theme.spaces.small};
   border-radius: ${({ theme }) => theme.borderRadius.small};
   text-align: center;
   margin-bottom: ${({ theme }) => theme.spaces.small};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > div {
+    padding: 0 .5em;
+    border: 1px solid;
+    border-radius: 5px 0 0 5px;
+  }
+
+  & > span {
+    background: #FFF;
+    color: ${({ theme }) => theme.colors.primaryColor};
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 .5em;
+    border-radius: 0 5px 5px 0;
+  }
 `
 
 export const TipsContainer = styled.div`

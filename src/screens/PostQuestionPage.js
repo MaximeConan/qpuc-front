@@ -1,6 +1,6 @@
 import React, { useState} from 'react'
-import { FileAddOutlined, DeleteOutlined } from '@ant-design/icons'
-import { Alert, Tooltip } from 'antd'
+import { FileAddOutlined, DeleteOutlined, InfoCircleOutlined } from '@ant-design/icons'
+import { Tooltip } from 'antd'
 
 import * as Styled from './__styles__/PostQuestionPage.styles'
 
@@ -79,10 +79,8 @@ const PostQuestionPage = () => {
                     <Styled.AnswerTag
                       key={index}
                     >
-                      <div>
-                        {answer}
-                          <DeleteOutlined onClick={() => onAnswerDelete(answer)}/>
-                      </div>
+                      <div>{answer}</div>
+                      <DeleteOutlined onClick={() => onAnswerDelete(answer)}/>
                     </Styled.AnswerTag>
                   )
                 })}  
@@ -91,7 +89,7 @@ const PostQuestionPage = () => {
         </Styled.FormContainer>
         <Styled.TipsContainer>
             <Styled.Tips>
-              <FileAddOutlined />
+              <InfoCircleOutlined />
               <h4>Je suis un titre 4</h4>
               <p>
                 Additional description and information about copywriting.
@@ -100,7 +98,7 @@ const PostQuestionPage = () => {
               </p>
             </Styled.Tips>
             <Styled.Tips>
-              <FileAddOutlined />
+              <InfoCircleOutlined />
               <h4>Je suis un titre 4</h4>
               <p>
                 Additional description and information about copywriting.
@@ -109,7 +107,7 @@ const PostQuestionPage = () => {
               </p>
             </Styled.Tips>
             <Styled.Tips>
-              <FileAddOutlined />
+              <InfoCircleOutlined />
               <h4>Je suis un titre 4</h4>
               <p>
                 Additional description and information about copywriting.

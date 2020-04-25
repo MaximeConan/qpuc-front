@@ -80,7 +80,9 @@ const PostQuestionPage = () => {
                       key={index}
                     >
                       <div>{answer}</div>
-                      <DeleteOutlined onClick={() => onAnswerDelete(answer)}/>
+                      <Tooltip title='Supprimer cette réponse'>
+                        <DeleteOutlined onClick={() => onAnswerDelete(answer)}/>
+                      </Tooltip>
                     </Styled.AnswerTag>
                   )
                 })}  

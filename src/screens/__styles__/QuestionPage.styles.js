@@ -39,8 +39,8 @@ export const Form = styled.form`
   }
   
   & > input {
-    width: calc(100% - 3em);
-    padding: 1.5em;
+    width: 100%;
+    padding: ${({ theme }) => theme.spaces.small};
   }
 
   & > button {

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { darken, border } from 'polished'
+import { darken } from 'polished'
 import { Spin } from 'antd'
 
 const primaryColor = '#ff7091'
@@ -52,7 +52,6 @@ export const Form = styled.form`
   & > input {
     width: calc(100% - 3em);
     padding: 1.5em;
-    bor
   }
 
   & > button {

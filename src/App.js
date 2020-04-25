@@ -22,7 +22,6 @@ const App = () => {
 		axios
 			.get('http://127.0.0.1/question/read/1')
 			.then((res) => {
-				console.log(res.data)
 				setData(res.data)
         setQuestionLength(res.data.question_length)
         setTimer({ ...timer, isLaunched: true })
@@ -44,7 +43,6 @@ const App = () => {
   
   useEffect(() => {
     const { hours, minutes, seconds } = timer.time
-    console.log(timer.time)
     setTimeout(() => {
       setTimer({ ...timer, time: {
         hours: minutes === 59 ? hours + 1 : hours,
@@ -77,7 +75,6 @@ const App = () => {
         duration: `${timer.time.hours}:${timer.time.minutes}:${timer.time.seconds}`
 			})
 			.then(function(response) {
-        console.log(response.data)
         setSolutionToShow(!response.data.eval_answer)
         setIsCorrectAnswer(response.data.eval_answer)
 			})

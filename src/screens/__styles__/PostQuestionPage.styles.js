@@ -2,38 +2,75 @@ import styled from 'styled-components'
 import { darken } from 'polished'
 
 export const Root = styled.div`
-  background-color: ${({ theme }) => theme.colors.primaryColor};
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  min-height: calc(100vh - ${({ theme }) => theme.components.nav.height});
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.primaryColor};
   color: ${({ theme }) => theme.colors.primaryTextColor};
-  text-align: left;
+`
+
+export const Content = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - ${({ theme }) => theme.components.nav.height});
 `
 
 export const FormContainer = styled.div`
   background-color: ${({ theme }) => darken(0.1, theme.colors.primaryColor)};
+  height: 100%;
   width: 50%;
-  border-radius:${({ theme }) => theme.borderRadius.small};
-  padding: ${({ theme }) => theme.spaces.large};
+
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: ${({ theme }) => theme.spaces.large};
 `
 
 export const Form = styled.form`
-  width: 100%;
+  width: 70%;
 `
 
-export const InputContainer = styled.div`
+export const StepsInputContainer = styled.div`
   background-color: rgba(255,255,255, 0.1);
   padding: ${({ theme }) => theme.spaces.small};
   border-radius: ${({ theme }) => theme.borderRadius.medium};
   color: #FFF;
   margin-bottom: ${({ theme }) => theme.spaces.small};
+`
+
+
+export const InputContainer = styled.div`
+  display: flex;
+  margin-top: ${({ theme }) => theme.spaces.small};
+
+
+  & > input {
+    border: none;
+    width: calc(100% - 3em);
+    padding: 1.5em;
+    border-radius: ${({ theme }) => theme.borderRadius.medium};
+  }
+`
+
+
+export const Icon = styled.i`
+  background-color: ${({ theme }) => theme.colors.secondaryColor};
+  display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: ${({ theme }) => theme.spaces.small};
+  border-radius: ${({ theme }) => theme.borderRadius.medium};
+  margin-left: ${({ theme }) => theme.spaces.small};
+  cursor: pointer;
+  transition: all .3s;
+
+  &:hover {
+    background-color: ${({ theme }) => darken(0.1, theme.colors.secondaryColor)};
+  }
 `
 
 export const Input = styled.input`
@@ -63,11 +100,6 @@ export const Button = styled.button`
   }
 `
 
-export const ButtonStepsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
-
 export const AnswersContainer = styled.div`
   display: flex;
   margin-top: ${({ theme }) => theme.spaces.small};
@@ -79,4 +111,8 @@ export const AnswerTag = styled.div`
   color: #FFF;
   margin-right: ${({ theme }) => theme.spaces.small};
   border-radius: ${({ theme }) => theme.borderRadius.small};
+`
+
+export const TipsContainer = styled.div`
+  width: 50%;
 `

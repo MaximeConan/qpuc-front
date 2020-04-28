@@ -24,10 +24,6 @@ const PostQuestionPage = () => {
 		setSteps(newSteps)
 	}
 
-	const onPostQuestionSubmit = (e) => {
-		e.preventDefault()
-	}
-
 	const onPostAnswers = (e) => {
 		e.preventDefault()
 		setAnswersList([ ...answersList, answer ])
@@ -45,7 +41,6 @@ const PostQuestionPage = () => {
 					<Styled.Form>
 						<h2>Ajoutez les indices de votre question</h2>
 						{steps.map(({ step, indice }, index) => {
-							console.log(indice)
 							return (
 								<Styled.StepsInputContainer key={index}>
 									<Styled.InputContainer>
@@ -59,28 +54,25 @@ const PostQuestionPage = () => {
 											spaces={{ bottom: 0, right: 1 }}
 										/>
 										{index !== 0 && (
-											<Tooltip title="Retirer cette étape">
-												<Button
-													onClick={(e) => onRemoveStepClick(e, step)}
-													spaces={{ bottom: 0 }}
-												>
+											<Button onClick={(e) => onRemoveStepClick(e, step)} spaces={{ bottom: 0 }}>
+												<Tooltip title="Retirer cette étape">
 													<DeleteOutlined />
-												</Button>
-											</Tooltip>
-										)}
-										<Tooltip
-											title={
-												indice === '' ? (
-													`Vous devez remplir le champs avant d'en ajouter`
-												) : (
-													`Ajouter une étape`
-												)
-											}
-										>
-											<Button onClick={(e) => onAddStepClick(e, indice)} spaces={{ bottom: 0 }}>
-												<FileAddOutlined />
+												</Tooltip>
 											</Button>
-										</Tooltip>
+										)}
+										<Button onClick={(e) => onAddStepClick(e, indice)} spaces={{ bottom: 0 }}>
+											<Tooltip
+												title={
+													indice === '' ? (
+														`Vous devez remplir le champs avant d'en ajouter`
+													) : (
+														`Ajouter une étape`
+													)
+												}
+											>
+												<FileAddOutlined />
+											</Tooltip>
+										</Button>
 									</Styled.InputContainer>
 								</Styled.StepsInputContainer>
 							)

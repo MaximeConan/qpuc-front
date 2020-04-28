@@ -1,4 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
+import Button from '../../components/Button/Button'
 
 import * as Styled from './__styles__/Home.styles'
 
@@ -18,14 +21,18 @@ const Home = () => {
 						<span>De retour ?</span>
 						<br />Connectez-vous pour participer.
 					</p>
-					<Styled.Button to="connexion">connexion</Styled.Button>
+					<Link to="inscription">
+						<Button width="100%" label="Connexion" />
+					</Link>
 				</Styled.ButtonContainer>
 				<Styled.ButtonContainer>
 					<p>
 						<span>Pas encore de compte ?</span>
 						<br /> C'est le moment de vous inscrire !
 					</p>
-					<Styled.Button to="inscription">Inscription</Styled.Button>
+					<Link to="inscription">
+						<Button width="100%" label="Inscription" />
+					</Link>
 				</Styled.ButtonContainer>
 			</Styled.AuthContainer>
 		</Styled.Root>

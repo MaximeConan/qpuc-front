@@ -70,7 +70,7 @@ const QuestionPage = () => {
 				setCurrentQuestion([ ...currentQuestion, data.question[0] ])
 			}
 		},
-		[ data, currentQuestion, questionLength ]
+		[ data, currentQuestion, questionLength, index ]
 	)
 
 	const onAnswerSubmit = (e) => {
@@ -109,7 +109,15 @@ const QuestionPage = () => {
 			<Styled.Content>
 				<Styled.FormContainer>
 					{iscorrectAnswer ? (
-						<Styled.SuccessMessage>Bien joué ! 😁🚀</Styled.SuccessMessage>
+						<Styled.SuccessMessage>
+							Bien joué !{' '}
+							<span role="img" aria-label="emoji">
+								😁
+							</span>
+							<span role="img" aria-label="emoji">
+								🚀
+							</span>
+						</Styled.SuccessMessage>
 					) : (
 						<Fragment>
 							<Styled.Timer>{`🏁 | Temps passé : ${hours}:${minutes}:${seconds}`}</Styled.Timer>
@@ -121,15 +129,21 @@ const QuestionPage = () => {
 									value={answer}
 									onChange={(e) => setAnswer(e.target.value)}
 								/>
-								<Button label="Envoyer la réponse" width="100%" />
+								<Button label="Envoyer la réponse" width="100%" onClick={(e) => onAnswerSubmit(e)} />
 								{solutionToShow ? (
 									<div>
 										<Styled.ErrorMessage>
-											Malheureusement c'est la mauvaise réponse 😥
+											Malheureusement c'est la mauvaise réponse{' '}
+											<span role="img" aria-label="emoji">
+												😥
+											</span>
 										</Styled.ErrorMessage>
 										{!toggleSolution ? (
 											<Styled.ToggleSolution onClick={onToggleSolution}>
-												Du mal à trouver la réponse ? Tu peux cliquer ici 🙋
+												Du mal à trouver la réponse ? Tu peux cliquer ici{' '}
+												<span role="img" aria-label="emoji">
+													🙋
+												</span>
 											</Styled.ToggleSolution>
 										) : (
 											<div>{solution}</div>
@@ -147,8 +161,12 @@ const QuestionPage = () => {
 					{currentQuestion.map(({ step, indice }, index) => {
 						return <Styled.Tips key={index}>{`${step}: ${indice}`}</Styled.Tips>
 					})}
-					{currentQuestion.length === questionLength && (
-						<Styled.CatchPhrase>Je suis, je suis, je suiiiiiiiiiis ....</Styled.CatchPhrase>
+					{questionLength ? (
+						currentQuestion.length === questionLength && (
+							<Styled.CatchPhrase>Je suis, je suis, je suiiiiiiiiiis ....</Styled.CatchPhrase>
+						)
+					) : (
+						<Styled.Loader size="large" />
 					)}
 				</Styled.TipsContainer>
 			</Styled.Content>

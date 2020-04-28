@@ -39,6 +39,7 @@ export const ButtonContainer = styled.div`
 	padding: ${({ theme }) => theme.spaces.medium};
 	border-radius: ${({ theme }) => theme.borderRadius.medium};
 	margin-bottom: ${({ theme }) => theme.spaces.small};
+	width: 480px;
 
 	& > p > span {
 		font-weight: 900;

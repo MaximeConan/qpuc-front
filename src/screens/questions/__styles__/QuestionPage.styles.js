@@ -73,6 +73,10 @@ export const Loader = styled(Spin)`
 display: flex;
 justify-content: center;
 align-items: center;
+
+ & > span > i {
+	 background-color: ${({ theme }) => theme.colors.primaryTextColor};
+ }
 `
 
 export const Timer = styled.div`

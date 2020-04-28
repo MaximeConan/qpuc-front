@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import * as Styled from './__styles__/Input.styles'
 
 const Input = ({ type, placeholder, name, onChange, spaces }) => {
-	console.log(spaces)
 	return <Styled.Input type={type} placeholder={placeholder} name={name} onChange={onChange} spaces={spaces} />
 }
 

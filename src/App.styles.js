@@ -5,106 +5,80 @@ import { Spin } from 'antd'
 const primaryColor = '#ff7091'
 const secondaryColor = '#f3c623'
 const primaryTextColor = '#FFF'
-const borderRadius= '5px'
+const borderRadius = '5px'
 const spaces = {
-  small: '1em',
-  medium: '2em',
-  large: '3em'
+	small: '1em',
+	medium: '2em',
+	large: '3em'
 }
 
 export const Root = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  background-color: ${primaryColor};
-  color: ${primaryTextColor};
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+	background-color: ${primaryColor};
+	color: ${primaryTextColor};
 `
 
 export const Content = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
 `
 
 export const FormContainer = styled.div`
-  background-color: ${darken(0.1, primaryColor)};
-  height: 100%;
-  width: 50%;
+	background-color: ${darken(0.1, primaryColor)};
+	height: 100%;
+	width: 50%;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 `
 
-export const Form = styled.form`
-  width: 70%;
-  & > button, & > input {
-    border: none;
-    border-radius: ${borderRadius};
-    margin-bottom: ${spaces.small};
-  }
-  
-  & > input {
-    width: calc(100% - 3em);
-    padding: 1.5em;
-  }
-
-  & > button {
-    width : 100%;
-    background-color: ${secondaryColor};
-    color: ${darken(0.3, secondaryColor)};
-    padding: ${spaces.small};
-    transition: all .3s;
-    cursor: pointer;
-
-    &:hover {
-      background-color: ${darken(0.1, secondaryColor)};
-    }
-  }
-`
+export const Form = styled.form`width: 70%;`
 
 export const TipsContainer = styled.div`
-  width: 50%;
-  padding: ${spaces.large};
-  height: 100%;
-  text-align: center;
+	width: 50%;
+	padding: ${spaces.large};
+	height: 100%;
+	text-align: center;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 `
 
 export const Tips = styled.div`
-  padding-bottom: ${spaces.small};
-  margin-bottom: ${spaces.small};
-  border-bottom: 1px solid;
+	padding-bottom: ${spaces.small};
+	margin-bottom: ${spaces.small};
+	border-bottom: 1px solid;
 `
 
 export const CatchPhrase = styled.div`
-  font-weight: bold;
-  font-size: 18px;
+	font-weight: bold;
+	font-size: 18px;
 `
 
 export const SuccessMessage = styled.div`
-    background-color: ${secondaryColor};
-    padding: 3em 5em;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 18px;
+	background-color: ${secondaryColor};
+	padding: 3em 5em;
+	border-radius: 5px;
+	font-weight: bold;
+	font-size: 18px;
 `
 
 export const ErrorMessage = styled.div`
-    margin-bottom: ${spaces.small};
-    font-weight: bold;
-    font-size: 18px;
+	margin-bottom: ${spaces.small};
+	font-weight: bold;
+	font-size: 18px;
 `
-
 
 export const Loader = styled(Spin)`
 display: flex;
@@ -113,27 +87,27 @@ align-items: center;
 `
 
 export const Timer = styled.div`
-  margin-bottom: ${spaces.small};
-  position: absolute;
-  text-align: center;
-  top: 10px;
+	margin-bottom: ${spaces.small};
+	position: absolute;
+	text-align: center;
+	top: 10px;
 `
 
 export const ToggleSolution = styled.div`
-  display: inline-block;
-  cursor: pointer;
-  transition: all .5s;
+	display: inline-block;
+	cursor: pointer;
+	transition: all .5s;
 
-  ::after {
-    content: '';
-    width: 0px;
-    height: 1px;
-    display: block;
-    background: ${secondaryColor};
-    transition: all 1s;
-  }
+	::after {
+		content: '';
+		width: 0px;
+		height: 1px;
+		display: block;
+		background: ${secondaryColor};
+		transition: all 1s;
+	}
 
-  &:hover:after {
-    width: 100%;
-  }
+	&:hover:after {
+		width: 100%;
+	}
 `

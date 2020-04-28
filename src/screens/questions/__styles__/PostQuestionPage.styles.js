@@ -47,14 +47,6 @@ export const InputContainer = styled.div`
 	&:first-child {
 		margin: 0;
 	}
-
-	& > input {
-		border: none;
-		width: calc(100% - 3em);
-		padding: ${({ theme }) => theme.spaces.small};
-		border-radius: ${({ theme }) => theme.borderRadius.medium};
-		color: ${({ theme }) => theme.colors.darkGrey};
-	}
 `
 
 export const Icon = styled.i`
@@ -68,33 +60,6 @@ export const Icon = styled.i`
 	margin-left: ${({ theme }) => theme.spaces.small};
 	cursor: pointer;
 	transition: all .3s;
-
-	&:hover {
-		background-color: ${({ theme }) => darken(0.1, theme.colors.secondaryColor)};
-	}
-`
-
-export const Input = styled.input`
-  border: none;
-  border-radius: ${({ theme }) => theme.borderRadius.medium};
-  color: ${({ theme }) => theme.colors.darkGrey};
-  width: 100%;
-  padding: ${({ theme }) => theme.spaces.small};
-  margin-bottom: ${({ theme }) => theme.spaces.small};
-  margin-top: ${({ theme }) => theme.spaces.small};
-c
-`
-
-export const Button = styled.button`
-	border: none;
-	border-radius: ${({ theme }) => theme.borderRadius.medium};
-	width: 49%;
-	background-color: ${({ theme }) => theme.colors.secondaryColor};
-	color: ${({ theme }) => darken(0.3, theme.colors.secondaryColor)};
-	padding: ${({ theme }) => theme.spaces.small};
-	transition: all .3s;
-	cursor: pointer;
-	margin-top: ${({ theme }) => theme.spaces.small};
 
 	&:hover {
 		background-color: ${({ theme }) => darken(0.1, theme.colors.secondaryColor)};

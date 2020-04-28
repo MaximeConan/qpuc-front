@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import * as Styled from './__styles__/Home.styles'
 

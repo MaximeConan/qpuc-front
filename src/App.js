@@ -16,10 +16,10 @@ const App = () => {
 		<Router>
 			<Nav />
 			<Switch>
-				<PrivateRoute path="/question" isAuthenticated={true}>
+				<PrivateRoute path="/question">
 					<QuestionPage />
 				</PrivateRoute>
-				<PrivateRoute path="/post-question" isAuthenticated={true}>
+				<PrivateRoute path="/post-question">
 					<PostQuestionPage />
 				</PrivateRoute>
 				<Route path="/connexion">

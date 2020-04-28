@@ -70,7 +70,7 @@ const QuestionPage = () => {
 				setCurrentQuestion([ ...currentQuestion, data.question[0] ])
 			}
 		},
-		[ data, currentQuestion, questionLength, index ]
+		[ data, currentQuestion, questionLength ]
 	)
 
 	const onAnswerSubmit = (e) => {

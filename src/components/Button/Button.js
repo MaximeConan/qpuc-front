@@ -23,7 +23,7 @@ Button.propTypes = {
 	width: PropTypes.string,
 	label: PropTypes.string,
 	spaces: PropTypes.object,
-	onClick: PropTypes.func.isRequired
+	onClick: PropTypes.func
 }
 
 Button.defaultProps = {

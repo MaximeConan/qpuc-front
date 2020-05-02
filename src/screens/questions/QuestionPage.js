@@ -1,5 +1,9 @@
 import React, { useEffect, useState, Fragment } from 'react'
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { isNil } from 'lodash'
+
+import { getQuestion } from '../../actions/questionActions'
+import { selectQuestion, selectIsLoading } from '../../selectors/questionSelectors'
 
 import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
@@ -7,11 +11,7 @@ import Input from '../../components/Input/Input'
 import * as Styled from './__styles__/QuestionPage.styles'
 
 const QuestionPage = () => {
-	const [ data, setData ] = useState(null)
-	const [ isLoading, setIsLoading ] = useState(false)
 	const [ index, setIndex ] = useState(1)
-	const [ currentQuestion, setCurrentQuestion ] = useState([])
-	const [ questionLength, setQuestionLength ] = useState(0)
 	const [ answer, setAnswer ] = useState('')
 	const [ solution, setSolution ] = useState('')
 	const [ toggleSolution, setToggleSolution ] = useState(false)
@@ -19,28 +19,15 @@ const QuestionPage = () => {
 	const [ iscorrectAnswer, setIsCorrectAnswer ] = useState(false)
 	const [ timer, setTimer ] = useState({ isLaunched: false, time: { hours: 0, minutes: 0, seconds: 0 } })
 
-	useEffect(() => {
-		setIsLoading(true)
-		axios
-			.get('http://127.0.0.1/question/read/1')
-			.then((res) => {
-				setData(res.data)
-				setQuestionLength(res.data.question_length)
-				setTimer({ ...timer, isLaunched: true })
-				setIsLoading(false)
-			})
-			.catch((error) => {
-				console.error(error)
-				setIsLoading(false)
-			})
+	const dispatch = useDispatch()
+	const data = useSelector(selectQuestion)
+	const isLoading = useSelector(selectIsLoading)
 
-		axios
-			.get('http://127.0.0.1/question/read/solution/1')
-			.then((res) => {
-				setSolution(res.data.answer_correct.text)
-			})
-			.catch((error) => console.error(error))
-	}, [])
+	console.log(data)
+
+	useEffect(() => {
+		dispatch(getQuestion(1))
+	}, [dispatch])
 
 	useEffect(
 		() => {
@@ -59,34 +46,8 @@ const QuestionPage = () => {
 		[ timer ]
 	)
 
-	useEffect(
-		() => {
-			if (data && currentQuestion.length !== questionLength) {
-				setTimeout(() => {
-					setIndex(index + 1)
-					setCurrentQuestion([ ...currentQuestion, data.question[index] ])
-				}, 10000)
-			} else if (data && currentQuestion.length === 0) {
-				setCurrentQuestion([ ...currentQuestion, data.question[0] ])
-			}
-		},
-		[ data, currentQuestion, questionLength ]
-	)
-
 	const onAnswerSubmit = (e) => {
 		e.preventDefault()
-		axios
-			.post('http://127.0.0.1/question/repondre/1', {
-				text: answer,
-				duration: `${timer.time.hours}:${timer.time.minutes}:${timer.time.seconds}`
-			})
-			.then(function(response) {
-				setSolutionToShow(!response.data.eval_answer)
-				setIsCorrectAnswer(response.data.eval_answer)
-			})
-			.catch(function(error) {
-				console.log(error)
-			})
 
 		setAnswer('')
 	}
@@ -104,7 +65,7 @@ const QuestionPage = () => {
 	const seconds = timer.time.seconds < 10 ? `0${timer.time.seconds}` : `${timer.time.seconds}`
 	const secondsToString = seconds.toString()
 
-	return !isLoading ? (
+	return !isLoading && !isNil(data) ? (
 		<Styled.Root>
 			<Styled.Content>
 				<Styled.FormContainer>
@@ -155,14 +116,14 @@ const QuestionPage = () => {
 					)}
 				</Styled.FormContainer>
 				<Styled.TipsContainer>
-					{currentQuestion.length !== questionLength && (
+					{data.question.length !==data.questionLength && (
 						<Styled.Timer>{`⌛ | Prochain indice dans: ${10 - secondsToString.charAt(1)}`}</Styled.Timer>
 					)}
-					{currentQuestion.map(({ step, indice }, index) => {
+					{data.question.map(({ step, indice }, index) => {
 						return <Styled.Tips key={index}>{`${step}: ${indice}`}</Styled.Tips>
 					})}
-					{questionLength ? (
-						currentQuestion.length === questionLength && (
+					{data.questionLength ? (
+						data.question.length === data.questionLength && (
 							<Styled.CatchPhrase>Je suis, je suis, je suiiiiiiiiiis ....</Styled.CatchPhrase>
 						)
 					) : (

@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import QuestionPage from './screens/questions/QuestionPage'
 import PostQuestionPage from './screens/questions/PostQuestionPage'
@@ -11,7 +12,16 @@ import Home from './screens/home/Home'
 import Nav from './components/Nav/Nav'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 
+import { startup } from './actions/appActions'
+
 const App = () => {
+
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(startup())
+	}, [dispatch])
+
 	return (
 		<Router>
 			<Nav />

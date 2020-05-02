@@ -1,7 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import 'antd/dist/antd.css'
+import { Provider } from 'react-redux'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
+
+import store from './store'
 
 import App from './App'
 
@@ -37,9 +40,11 @@ const GlobalStyle = createGlobalStyle`
 `
 
 ReactDOM.render(
+  <Provider store={store}>
 	<ThemeProvider theme={theme}>
 		<GlobalStyle />
 		<App />
-	</ThemeProvider>,
+	</ThemeProvider>
+  </Provider>,
 	document.getElementById('root')
 )

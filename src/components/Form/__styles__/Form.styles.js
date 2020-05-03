@@ -1,7 +1,13 @@
 import styled from 'styled-components'
 import { darken } from 'polished'
 
-export const Root = styled.div`width: 480px;`
+export const Root = styled.div`
+	width: 480px;
+
+	${({ theme }) => theme.devices.md} {
+		width: 100%;
+	}
+`
 
 export const Input = styled.input`
 	border: none;
@@ -24,5 +30,17 @@ export const Button = styled.button`
 
 	&:hover {
 		background-color: ${({ theme }) => darken(0.1, theme.colors.secondaryColor)};
+	}
+`
+
+export const Error = styled.div`
+	background-color: #222;
+	padding: 1em;
+	border-radius: 5px;
+	margin-bottom: 1em;
+
+	& > p:last-child {
+		padding-bottom: 0;
+		margin-bottom: 0;
 	}
 `

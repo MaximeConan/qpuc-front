@@ -2,20 +2,23 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import Button from '../../components/Button/Button'
+import LeftContainer from '../../components/Layout/LeftContainer'
+import RightContainer from '../../components/Layout/RightContainer'
+import GlobalContainer from '../../components/Layout/GlobalContainer'
 
 import * as Styled from './__styles__/Home.styles'
 
 const Home = () => {
 	return (
-		<Styled.Root>
-			<Styled.TitleContainer>
+		<GlobalContainer>
+			<LeftContainer>
 				<h1>Bienvenue sur QPUC !</h1>
 				<p>
 					Une fois connecté, vous aurez accès aux questions,<br /> à votre classement et pourrez ajouter vos
 					propres questions !
 				</p>
-			</Styled.TitleContainer>
-			<Styled.AuthContainer>
+			</LeftContainer>
+			<RightContainer>
 				<Styled.ButtonContainer>
 					<p>
 						<span>De retour ?</span>
@@ -34,8 +37,8 @@ const Home = () => {
 						<Button width="100%" label="Inscription" />
 					</Link>
 				</Styled.ButtonContainer>
-			</Styled.AuthContainer>
-		</Styled.Root>
+			</RightContainer>
+		</GlobalContainer>
 	)
 }
 

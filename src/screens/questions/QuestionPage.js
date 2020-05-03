@@ -2,11 +2,14 @@ import React, { useEffect, useState, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isNil } from 'lodash'
 
-import { getQuestion } from '../../actions/questionActions'
+import { getQuestion, postAnswer } from '../../actions/questionActions'
 import { selectQuestion, selectIsLoading } from '../../selectors/questionSelectors'
 
 import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
+import LeftContainer from '../../components/Layout/LeftContainer'
+import RightContainer from '../../components/Layout/RightContainer'
+import GlobalContainer from '../../components/Layout/GlobalContainer'
 
 import * as Styled from './__styles__/QuestionPage.styles'
 
@@ -17,6 +20,7 @@ const QuestionPage = () => {
 	const [ toggleSolution, setToggleSolution ] = useState(false)
 	const [ solutionToShow, setSolutionToShow ] = useState(false)
 	const [ iscorrectAnswer, setIsCorrectAnswer ] = useState(false)
+	const [ currentQuestion, setCurrentQuestion ] = useState([])
 	const [ timer, setTimer ] = useState({ isLaunched: false, time: { hours: 0, minutes: 0, seconds: 0 } })
 
 	const dispatch = useDispatch()
@@ -25,9 +29,26 @@ const QuestionPage = () => {
 
 	console.log(data)
 
-	useEffect(() => {
-		dispatch(getQuestion(1))
-	}, [dispatch])
+	useEffect(
+		() => {
+			dispatch(getQuestion(1))
+		},
+		[ dispatch ]
+	)
+
+	useEffect(
+		() => {
+			if (data && currentQuestion.length !== data.questionLength && currentQuestion.length !== 0) {
+				setTimeout(() => {
+					setIndex(index + 1)
+					setCurrentQuestion([ ...currentQuestion, data.question[index] ])
+				}, 10000)
+			} else if (data && currentQuestion.length === 0) {
+				setCurrentQuestion([ ...currentQuestion, data.question[0] ])
+			}
+		},
+		[ data, currentQuestion ]
+	)
 
 	useEffect(
 		() => {
@@ -48,7 +69,7 @@ const QuestionPage = () => {
 
 	const onAnswerSubmit = (e) => {
 		e.preventDefault()
-
+		dispatch(postAnswer(1, answer, timer.time))
 		setAnswer('')
 	}
 
@@ -65,73 +86,71 @@ const QuestionPage = () => {
 	const seconds = timer.time.seconds < 10 ? `0${timer.time.seconds}` : `${timer.time.seconds}`
 	const secondsToString = seconds.toString()
 
-	return !isLoading && !isNil(data) ? (
-		<Styled.Root>
-			<Styled.Content>
-				<Styled.FormContainer>
-					{iscorrectAnswer ? (
-						<Styled.SuccessMessage>
-							Bien joué !{' '}
-							<span role="img" aria-label="emoji">
-								😁
-							</span>
-							<span role="img" aria-label="emoji">
-								🚀
-							</span>
-						</Styled.SuccessMessage>
-					) : (
-						<Fragment>
-							<Styled.Timer>{`🏁 | Temps passé : ${hours}:${minutes}:${seconds}`}</Styled.Timer>
-							<Styled.Form onSubmit={(e) => onAnswerSubmit(e)}>
-								<Input
-									type="text"
-									placeholder="Entrez la réponse"
-									name="answer"
-									value={answer}
-									onChange={(e) => setAnswer(e.target.value)}
-								/>
-								<Button label="Envoyer la réponse" width="100%" onClick={(e) => onAnswerSubmit(e)} />
-								{solutionToShow ? (
-									<div>
-										<Styled.ErrorMessage>
-											Malheureusement c'est la mauvaise réponse{' '}
+	return !isLoading && !isNil(currentQuestion) && !isNil(data) ? (
+		<GlobalContainer>
+			<LeftContainer>
+				{iscorrectAnswer ? (
+					<Styled.SuccessMessage>
+						Bien joué !{' '}
+						<span role="img" aria-label="emoji">
+							😁
+						</span>
+						<span role="img" aria-label="emoji">
+							🚀
+						</span>
+					</Styled.SuccessMessage>
+				) : (
+					<Fragment>
+						<Styled.Timer>{`🏁 | Temps passé : ${hours}:${minutes}:${seconds}`}</Styled.Timer>
+						<Styled.Form onSubmit={(e) => onAnswerSubmit(e)}>
+							<Input
+								type="text"
+								placeholder="Entrez la réponse"
+								name="answer"
+								value={answer}
+								onChange={(e) => setAnswer(e.target.value)}
+							/>
+							<Button label="Envoyer la réponse" width="100%" onClick={(e) => onAnswerSubmit(e)} />
+							{data.isCorrectAnswer === false ? (
+								<div>
+									<Styled.ErrorMessage>
+										Malheureusement c'est la mauvaise réponse{' '}
+										<span role="img" aria-label="emoji">
+											😥
+										</span>
+									</Styled.ErrorMessage>
+									{!toggleSolution ? (
+										<Styled.ToggleSolution onClick={onToggleSolution}>
+											Du mal à trouver la réponse ? Tu peux cliquer ici{' '}
 											<span role="img" aria-label="emoji">
-												😥
+												🙋
 											</span>
-										</Styled.ErrorMessage>
-										{!toggleSolution ? (
-											<Styled.ToggleSolution onClick={onToggleSolution}>
-												Du mal à trouver la réponse ? Tu peux cliquer ici{' '}
-												<span role="img" aria-label="emoji">
-													🙋
-												</span>
-											</Styled.ToggleSolution>
-										) : (
-											<div>{solution}</div>
-										)}
-									</div>
-								) : null}
-							</Styled.Form>
-						</Fragment>
-					)}
-				</Styled.FormContainer>
-				<Styled.TipsContainer>
-					{data.question.length !==data.questionLength && (
-						<Styled.Timer>{`⌛ | Prochain indice dans: ${10 - secondsToString.charAt(1)}`}</Styled.Timer>
-					)}
-					{data.question.map(({ step, indice }, index) => {
-						return <Styled.Tips key={index}>{`${step}: ${indice}`}</Styled.Tips>
-					})}
-					{data.questionLength ? (
-						data.question.length === data.questionLength && (
-							<Styled.CatchPhrase>Je suis, je suis, je suiiiiiiiiiis ....</Styled.CatchPhrase>
-						)
-					) : (
-						<Styled.Loader size="large" />
-					)}
-				</Styled.TipsContainer>
-			</Styled.Content>
-		</Styled.Root>
+										</Styled.ToggleSolution>
+									) : (
+										<div>{data.solution}</div>
+									)}
+								</div>
+							) : (
+								!isNil(data.isCorrectAnswer) && <div>Félicitations</div>
+							)}
+						</Styled.Form>
+					</Fragment>
+				)}
+			</LeftContainer>
+			<RightContainer>
+				{currentQuestion.length !== data.questionLength && (
+					<Styled.Timer>{`⌛ | Prochain indice dans: ${10 - secondsToString.charAt(1)}`}</Styled.Timer>
+				)}
+
+				{currentQuestion.map(({ step, indice }, index) => {
+					return <Styled.Tips key={index}>{`${step}: ${indice}`}</Styled.Tips>
+				})}
+
+				{currentQuestion.length === data.questionLength && (
+					<Styled.CatchPhrase>Je suis, je suis, je suiiiiiiiiiis ....</Styled.CatchPhrase>
+				)}
+			</RightContainer>
+		</GlobalContainer>
 	) : (
 		<Styled.Loader />
 	)

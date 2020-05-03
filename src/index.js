@@ -21,8 +21,8 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
-  html, body, #root {
-    height: 100%
+  #root {
+    height: 100vh;
   }
 
   a , h1, h2, h3, h4, h5, h6 {
@@ -40,11 +40,11 @@ const GlobalStyle = createGlobalStyle`
 `
 
 ReactDOM.render(
-  <Provider store={store}>
-	<ThemeProvider theme={theme}>
-		<GlobalStyle />
-		<App />
-	</ThemeProvider>
-  </Provider>,
+	<Provider store={store}>
+		<ThemeProvider theme={theme}>
+			<GlobalStyle />
+			<App />
+		</ThemeProvider>
+	</Provider>,
 	document.getElementById('root')
 )

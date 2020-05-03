@@ -1,36 +1,13 @@
 import styled from 'styled-components'
 import { darken } from 'polished'
 
-export const Root = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	background-color: ${({ theme }) => theme.colors.primaryColor};
-	color: ${({ theme }) => theme.colors.primaryTextColor};
-	text-align: left;
-`
+export const Form = styled.form`
+	width: 480px;
 
-export const Content = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: calc(100vh - ${({ theme }) => theme.components.nav.height});
+	${({ theme }) => theme.devices.md} {
+		width: 100%;
+	}
 `
-
-export const FormContainer = styled.div`
-	background-color: ${({ theme }) => darken(0.1, theme.colors.primaryColor)};
-	height: 100%;
-	width: 50%;
-	overflow-y: scroll;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-`
-
-export const Form = styled.form`width: 70%;`
 
 export const StepsInputContainer = styled.div`
 	background-color: rgba(255, 255, 255, 0.1);
@@ -47,6 +24,15 @@ export const InputContainer = styled.div`
 	&:first-child {
 		margin: 0;
 	}
+
+	${({ theme }) => theme.devices.md} {
+		flex-direction: column;
+	}
+`
+
+export const ButtonsContainer = styled.div`
+	display flex;
+	justify-content: space-between;
 `
 
 export const Icon = styled.i`
@@ -110,6 +96,7 @@ export const Tips = styled.div`
 	padding: ${({ theme }) => theme.spaces.small};
 	border-radius: ${({ theme }) => theme.borderRadius.small};
 	margin-bottom: ${({ theme }) => theme.spaces.small};
+	width: 100%;
 
 	&:last-child {
 		margin: 0;

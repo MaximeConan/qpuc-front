@@ -7,7 +7,7 @@ export const requestService = async (url, options = null) => {
 			method: 'GET',
 			query: null,
 			body: null,
-			headers: {},
+			headers: {}
 		}
 
 		const response = await axios(url, {
@@ -15,14 +15,14 @@ export const requestService = async (url, options = null) => {
 			headers: options.headers,
 			data: options.body,
 			params: options.query,
-			...options,
+			...options
 		})
 
 		if (inRange(response.status, 199, 300)) {
 			return {
 				body: response.data,
 				status: response.status,
-				headers: response.headers,
+				headers: response.headers
 			}
 		} else {
 			throw new Error(response.statusText)

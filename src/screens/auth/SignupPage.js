@@ -2,32 +2,32 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import Form from '../../components/Form/Form'
-
-import * as Styled from './__styles__/SignupPage.styles'
+import LeftContainer from '../../components/Layout/LeftContainer'
+import RightContainer from '../../components/Layout/RightContainer'
+import GlobalContainer from '../../components/Layout/GlobalContainer'
 
 const SignupPage = () => {
 	const fields = [
-		{ type: 'email', name: 'email', placeholder: 'Adresse email' },
-		{ type: 'text', name: 'pseudo', placeholder: 'Ton prénom ou pseudo favoris' },
-		{ type: 'number', name: 'age', placeholder: 'Âge' },
-		{ type: 'password', name: 'password', placeholder: 'Mot de passe' },
-		{ type: 'password', name: 'passwordConfirm', placeholder: 'Confirmation de mot de passe' }
+		{ type: 'email', name: 'email', placeholder: 'Adresse email', isRequired: true },
+		{ type: 'text', name: 'pseudo', placeholder: 'Ton prénom ou pseudo favoris', isRequired: true },
+		{ type: 'password', name: 'password', placeholder: 'Mot de passe', isRequired: true },
+		{ type: 'password', name: 'passwordConfirm', placeholder: 'Confirmation de mot de passe', isRequired: true }
 	]
 
 	const _onSubmit = (formData) => {
-		console.log(formData)
+		console.log('Signup Submit', formData)
 	}
 
 	return (
-		<Styled.Root>
-			<Styled.TitleContainer>
+		<GlobalContainer>
+			<LeftContainer>
 				<h1>Inscrivez-vous !</h1>
 				<p>
 					Une fois inscrit, vous aurez accès aux questions,<br /> à votre classement et pourrez ajouter vos
 					propres questions !
 				</p>
-			</Styled.TitleContainer>
-			<Styled.FormContainer>
+			</LeftContainer>
+			<RightContainer>
 				<Form fields={fields} onSubmit={_onSubmit} buttonLabel="Inscription" />
 				<p>
 					Déjà inscrit ? <Link to="/connexion">Connectez-vous</Link>
@@ -35,8 +35,8 @@ const SignupPage = () => {
 				<p>
 					Mot de passe oublié ? <Link to="/mot-de-passe-oublie">Par ici !</Link>
 				</p>
-			</Styled.FormContainer>
-		</Styled.Root>
+			</RightContainer>
+		</GlobalContainer>
 	)
 }
 

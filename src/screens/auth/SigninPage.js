@@ -1,19 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import Form from '../../components/Form/Form'
 import LeftContainer from '../../components/Layout/LeftContainer'
 import RightContainer from '../../components/Layout/RightContainer'
 import GlobalContainer from '../../components/Layout/GlobalContainer'
+import { postSignin } from '../../actions/authActions'
 
 const SigninPage = () => {
+	const dispatch = useDispatch()
+
 	const fields = [
 		{ type: 'email', name: 'email', placeholder: 'Adresse email', isRequired: true },
 		{ type: 'password', name: 'password', placeholder: 'Mot de passe', isRequired: true }
 	]
 
-	const _onSubmit = (formData) => {
-		console.log(formData)
+	const _onSubmit = ({ email, password }) => {
+		dispatch(postSignin(email.value, password.value))
 	}
 
 	return (

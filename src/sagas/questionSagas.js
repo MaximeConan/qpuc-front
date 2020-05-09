@@ -1,5 +1,4 @@
 import { put, take, race, takeLatest, fork } from 'redux-saga/effects'
-import { omit } from 'lodash'
 import {
 	getQuestionSuccess,
 	getQuestionFailure,

@@ -19,7 +19,7 @@ export function* requestSaga({ payload }) {
 		let { requestUrl, requestOptions } = payload
 
 		requestOptions = token
-			? { ...requestOptions, headers: { ...requestOptions.headers, 'X-API-Token': token } }
+			? { ...requestOptions, headers: { ...requestOptions.headers, Authorization: `Bearer ${token}` } }
 			: requestOptions
 
 		const { body, status, headers } = yield call(requestService, requestUrl, requestOptions)

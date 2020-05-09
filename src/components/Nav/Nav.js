@@ -7,8 +7,11 @@ import { SM, MD } from '../../enums/breakpointsTypes'
 import Button from '../Button/Button'
 
 import * as Styled from './__styles__/Nav.styles'
+import { useDispatch } from 'react-redux'
+import { signout } from '../../actions/authActions'
 
 const Nav = () => {
+	const dispatch = useDispatch()
 	const breakpoint = useBreakpoint()
 	const [ isOpen, setIsOpen ] = useState(false)
 
@@ -23,6 +26,10 @@ const Nav = () => {
 
 	const onMenuClick = (e) => {
 		isOpen ? onCloseMenu(e) : setIsOpen(true)
+	}
+
+	const onSignoutClick = () => {
+		dispatch(signout())
 	}
 
 	const items = [
@@ -49,6 +56,7 @@ const Nav = () => {
 									<Link to={item.path} onClick={() => setIsOpen(false)}>{item.label}</Link>
 								</li>
 							)}
+							<li>Déconnexion</li>
 						</Styled.MobileNavItemsContainer>
 					)}
 				</>
@@ -59,6 +67,7 @@ const Nav = () => {
 									<Link to={item.path}>{item.label}</Link>
 								</li>
 							)}
+					<li onClick={onSignoutClick}>Déconnexion</li>
 				</Styled.NavItemsContainer>
 			)}
 		</Styled.NavContainer>

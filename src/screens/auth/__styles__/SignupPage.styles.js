@@ -8,7 +8,6 @@ export const Root = styled.div`
 	width: 100%;
 	background-color: ${({ theme }) => theme.colors.primaryColor};
 	color: ${({ theme }) => theme.colors.primaryTextColor};
-	height: calc(100vh - ${({ theme }) => theme.components.nav.height});
 	text-align: center;
 `
 

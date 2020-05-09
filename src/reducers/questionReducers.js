@@ -14,10 +14,6 @@ const initialState = {
 }
 
 const questionReducers = (state = initialState, { type, payload }) => {
-	if (type.endsWith('FAILURE')) {
-		return { ...state, error: payload.error }
-	}
-
 	switch (type) {
 		case GET_QUESTION:
 		case POST_ANSWER:

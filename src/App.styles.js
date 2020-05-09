@@ -5,7 +5,7 @@ import { Spin } from 'antd'
 const primaryColor = '#ff7091'
 const secondaryColor = '#f3c623'
 const primaryTextColor = '#FFF'
-const borderRadius = '5px'
+
 const spaces = {
 	small: '1em',
 	medium: '2em',
@@ -17,7 +17,7 @@ export const Root = styled.div`
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	height: 100vh;
+	height: 100%;
 	background-color: ${primaryColor};
 	color: ${primaryTextColor};
 `

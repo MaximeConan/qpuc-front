@@ -35,6 +35,7 @@ export const MobileNavItemsContainer = styled.ul`
 		border: none;
 		margin: 0;
 	}
+
 `
 
 export const NavItemsContainer = styled.ul`
@@ -47,9 +48,15 @@ export const NavItemsContainer = styled.ul`
 
 	& > li {
 		margin-right: ${({ theme }) => theme.spaces.small};
-
-		& > a {
+		
+		& > div {
+			transition: all 3.s;
+			cursor: pointer;
 			color: ${({ theme }) => theme.colors.primaryTextColor};
+			
+			&:hover {
+				opacity: 0.8;
+			}
 		}
 	}
 

@@ -1,12 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import Form from '../../components/Form/Form'
 import LeftContainer from '../../components/Layout/LeftContainer'
 import RightContainer from '../../components/Layout/RightContainer'
 import GlobalContainer from '../../components/Layout/GlobalContainer'
+import { navigateTo } from '../../actions/navActions'
 
 const SignupPage = () => {
+	const dispatch = useDispatch()
+
 	const fields = [
 		{ type: 'email', name: 'email', placeholder: 'Adresse email', isRequired: true },
 		{ type: 'text', name: 'pseudo', placeholder: 'Ton prénom ou pseudo favoris', isRequired: true },
@@ -30,10 +33,10 @@ const SignupPage = () => {
 			<RightContainer>
 				<Form fields={fields} onSubmit={_onSubmit} buttonLabel="Inscription" />
 				<p>
-					Déjà inscrit ? <Link to="/connexion">Connectez-vous</Link>
+					Déjà inscrit ? <div onClick={() => dispatch(navigateTo('/connexion'))}>Connectez-vous</div>
 				</p>
 				<p>
-					Mot de passe oublié ? <Link to="/mot-de-passe-oublie">Par ici !</Link>
+					Mot de passe oublié ? <div onClick={() => dispatch(navigateTo('/mot-de-passe-oublie'))}>Par ici !</div>
 				</p>
 			</RightContainer>
 		</GlobalContainer>

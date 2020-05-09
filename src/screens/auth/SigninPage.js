@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import Form from '../../components/Form/Form'
@@ -7,6 +6,7 @@ import LeftContainer from '../../components/Layout/LeftContainer'
 import RightContainer from '../../components/Layout/RightContainer'
 import GlobalContainer from '../../components/Layout/GlobalContainer'
 import { postSignin } from '../../actions/authActions'
+import { navigateTo } from '../../actions/navActions'
 
 const SigninPage = () => {
 	const dispatch = useDispatch()
@@ -32,10 +32,10 @@ const SigninPage = () => {
 			<RightContainer>
 				<Form fields={fields} onSubmit={_onSubmit} buttonLabel="Connexion" />
 				<p>
-					Pas encore de compte ? <Link to="/inscription">Inscrivez-vous</Link>
+					Pas encore de compte ? <div onClick={() => dispatch(navigateTo('/inscription'))}>Inscrivez-vous</div>
 				</p>
 				<p>
-					Mot de passe oublié ? <Link to="/mot-de-passe-oublie">Par ici !</Link>
+					Mot de passe oublié ? <div onClick={() => dispatch(navigateTo('/mot-de-passe-oublie'))}>Par ici !</div>
 				</p>
 			</RightContainer>
 		</GlobalContainer>

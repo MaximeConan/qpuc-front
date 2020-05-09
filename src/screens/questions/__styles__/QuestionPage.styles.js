@@ -16,7 +16,6 @@ export const Content = styled.div`
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	height: calc(100vh - ${({ theme }) => theme.components.nav.height});
 `
 
 export const FormContainer = styled.div`
@@ -35,7 +34,6 @@ export const Form = styled.form`width: 70%;`
 export const TipsContainer = styled.div`
 	width: 50%;
 	padding: 0 ${({ theme }) => theme.spaces.large};
-	height: calc(100% - ${({ theme }) => theme.spaces.large});
 	text-align: center;
 
 	display: flex;
@@ -73,6 +71,8 @@ export const Loader = styled(Spin)`
 display: flex;
 justify-content: center;
 align-items: center;
+background-color: ${({ theme }) => theme.colors.primaryColor};
+height: 100%;
 
  & > span > i {
 	 background-color: ${({ theme }) => theme.colors.primaryTextColor};

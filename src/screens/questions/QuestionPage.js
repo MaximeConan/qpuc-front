@@ -27,8 +27,6 @@ const QuestionPage = () => {
 	const data = useSelector(selectQuestion)
 	const isLoading = useSelector(selectIsLoading)
 
-	console.log(data)
-
 	useEffect(
 		() => {
 			dispatch(getQuestion(1))
@@ -86,70 +84,80 @@ const QuestionPage = () => {
 	const seconds = timer.time.seconds < 10 ? `0${timer.time.seconds}` : `${timer.time.seconds}`
 	const secondsToString = seconds.toString()
 
-	return !isLoading && !isNil(currentQuestion) && !isNil(data) ? (
+	return !isLoading ? (
 		<GlobalContainer>
-			<LeftContainer>
-				{iscorrectAnswer ? (
-					<Styled.SuccessMessage>
-						Bien joué !{' '}
-						<span role="img" aria-label="emoji">
-							😁
-						</span>
-						<span role="img" aria-label="emoji">
-							🚀
-						</span>
-					</Styled.SuccessMessage>
-				) : (
-					<Fragment>
-						<Styled.Timer>{`🏁 | Temps passé : ${hours}:${minutes}:${seconds}`}</Styled.Timer>
-						<Styled.Form onSubmit={(e) => onAnswerSubmit(e)}>
-							<Input
-								type="text"
-								placeholder="Entrez la réponse"
-								name="answer"
-								value={answer}
-								onChange={(e) => setAnswer(e.target.value)}
-							/>
-							<Button label="Envoyer la réponse" width="100%" onClick={(e) => onAnswerSubmit(e)} />
-							{data.isCorrectAnswer === false ? (
-								<div>
-									<Styled.ErrorMessage>
-										Malheureusement c'est la mauvaise réponse{' '}
-										<span role="img" aria-label="emoji">
-											😥
-										</span>
-									</Styled.ErrorMessage>
-									{!toggleSolution ? (
-										<Styled.ToggleSolution onClick={onToggleSolution}>
-											Du mal à trouver la réponse ? Tu peux cliquer ici{' '}
-											<span role="img" aria-label="emoji">
-												🙋
-											</span>
-										</Styled.ToggleSolution>
+			{!isNil(currentQuestion) && !isNil(data) ? (
+				<Fragment>
+					<LeftContainer>
+						{iscorrectAnswer ? (
+							<Styled.SuccessMessage>
+								Bien joué !{' '}
+								<span role="img" aria-label="emoji">
+									😁
+								</span>
+								<span role="img" aria-label="emoji">
+									🚀
+								</span>
+							</Styled.SuccessMessage>
+						) : (
+							<Fragment>
+								<Styled.Timer>{`🏁 | Temps passé : ${hours}:${minutes}:${seconds}`}</Styled.Timer>
+								<Styled.Form onSubmit={(e) => onAnswerSubmit(e)}>
+									<Input
+										type="text"
+										placeholder="Entrez la réponse"
+										name="answer"
+										value={answer}
+										onChange={(e) => setAnswer(e.target.value)}
+									/>
+									<Button
+										label="Envoyer la réponse"
+										width="100%"
+										onClick={(e) => onAnswerSubmit(e)}
+									/>
+									{data.isCorrectAnswer === false ? (
+										<div>
+											<Styled.ErrorMessage>
+												Malheureusement c'est la mauvaise réponse{' '}
+												<span role="img" aria-label="emoji">
+													😥
+												</span>
+											</Styled.ErrorMessage>
+											{!toggleSolution ? (
+												<Styled.ToggleSolution onClick={onToggleSolution}>
+													Du mal à trouver la réponse ? Tu peux cliquer ici{' '}
+													<span role="img" aria-label="emoji">
+														🙋
+													</span>
+												</Styled.ToggleSolution>
+											) : (
+												<div>{data.solution}</div>
+											)}
+										</div>
 									) : (
-										<div>{data.solution}</div>
+										!isNil(data.isCorrectAnswer) && <div>Félicitations</div>
 									)}
-								</div>
-							) : (
-								!isNil(data.isCorrectAnswer) && <div>Félicitations</div>
-							)}
-						</Styled.Form>
-					</Fragment>
-				)}
-			</LeftContainer>
-			<RightContainer>
-				{currentQuestion.length !== data.questionLength && (
-					<Styled.Timer>{`⌛ | Prochain indice dans: ${10 - secondsToString.charAt(1)}`}</Styled.Timer>
-				)}
+								</Styled.Form>
+							</Fragment>
+						)}
+					</LeftContainer>
+					<RightContainer>
+						{currentQuestion.length !== data.questionLength && (
+							<Styled.Timer>{`⌛ | Prochain indice dans: ${10 - secondsToString.charAt(1)}`}</Styled.Timer>
+						)}
 
-				{currentQuestion.map(({ step, indice }, index) => {
-					return <Styled.Tips key={index}>{`${step}: ${indice}`}</Styled.Tips>
-				})}
+						{currentQuestion.map(({ step, indice }, index) => {
+							return <Styled.Tips key={index}>{`${step}: ${indice}`}</Styled.Tips>
+						})}
 
-				{currentQuestion.length === data.questionLength && (
-					<Styled.CatchPhrase>Je suis, je suis, je suiiiiiiiiiis ....</Styled.CatchPhrase>
-				)}
-			</RightContainer>
+						{currentQuestion.length === data.questionLength && (
+							<Styled.CatchPhrase>Je suis, je suis, je suiiiiiiiiiis ....</Styled.CatchPhrase>
+						)}
+					</RightContainer>
+				</Fragment>
+			) : (
+				<h1>Désolé, mais tu as déjà répondu à toutes les questions du jour !</h1>
+			)}
 		</GlobalContainer>
 	) : (
 		<Styled.Loader />

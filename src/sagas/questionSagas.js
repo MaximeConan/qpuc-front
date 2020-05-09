@@ -40,7 +40,6 @@ export function* getQuestionSaga({ payload }) {
 		}
 
 		const { payload: { responseBody } } = success
-
 		yield put(getQuestionSuccess(responseBody.steps, responseBody.question_length, responseBody.answers[0].answer))
 	} catch (err) {
 		yield put(getQuestionFailure(err))
@@ -91,8 +90,6 @@ export function* watchPostAnswerSaga() {
 export function* postAnswerSaga({ payload }) {
 	try {
 		const { id, answer, timeToAnswer } = payload
-
-		console.log('PAYLOAD', payload)
 
 		const url = `${resolveApiUrl(process.env.REACT_APP_POST_ANSWER)}/${id}`
 

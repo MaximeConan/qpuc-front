@@ -54,6 +54,8 @@ export function* singinSaga({ payload }) {
 			yield put(storeToken(token))
 			yield take(STORE_TOKEN_SUCCESS)
 
+			yield put(navigateTo('/question'))
+
 			yield put(postSigninSuccess())
 		} else {
 			yield put(postSigninFailure())

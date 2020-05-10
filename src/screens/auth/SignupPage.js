@@ -6,19 +6,21 @@ import LeftContainer from '../../components/Layout/LeftContainer'
 import RightContainer from '../../components/Layout/RightContainer'
 import GlobalContainer from '../../components/Layout/GlobalContainer'
 import { navigateTo } from '../../actions/navActions'
+import { postSignup } from '../../actions/authActions'
 
 const SignupPage = () => {
 	const dispatch = useDispatch()
 
 	const fields = [
 		{ type: 'email', name: 'email', placeholder: 'Adresse email', isRequired: true },
-		{ type: 'text', name: 'pseudo', placeholder: 'Ton prénom ou pseudo favoris', isRequired: true },
+		{ type: 'text', name: 'nickname', placeholder: 'Ton prénom ou pseudo favoris', isRequired: true },
 		{ type: 'password', name: 'password', placeholder: 'Mot de passe', isRequired: true },
 		{ type: 'password', name: 'passwordConfirm', placeholder: 'Confirmation de mot de passe', isRequired: true }
 	]
 
-	const _onSubmit = (formData) => {
-		console.log('Signup Submit', formData)
+	const _onSubmit = ({ email, nickname, passwordConfirm }) => {
+		console.log('Signup Submit', email, nickname, passwordConfirm)
+		dispatch(postSignup(email.value, nickname.value, passwordConfirm.value))
 	}
 
 	return (
@@ -36,7 +38,8 @@ const SignupPage = () => {
 					Déjà inscrit ? <div onClick={() => dispatch(navigateTo('/connexion'))}>Connectez-vous</div>
 				</p>
 				<p>
-					Mot de passe oublié ? <div onClick={() => dispatch(navigateTo('/mot-de-passe-oublie'))}>Par ici !</div>
+					Mot de passe oublié ?{' '}
+					<div onClick={() => dispatch(navigateTo('/mot-de-passe-oublie'))}>Par ici !</div>
 				</p>
 			</RightContainer>
 		</GlobalContainer>

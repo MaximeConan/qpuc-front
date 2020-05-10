@@ -26,8 +26,7 @@ const questionReducers = (state = initialState, { type, payload }) => {
 				data: {
 					...state.data,
 					question: payload.question,
-					questionLength: payload.questionLength,
-					solution: payload.answer
+					questionLength: payload.questionLength
 				}
 			}
 

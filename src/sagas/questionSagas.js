@@ -40,7 +40,7 @@ export function* getQuestionSaga({ payload }) {
 		}
 
 		const { payload: { responseBody } } = success
-		yield put(getQuestionSuccess(responseBody.steps, responseBody.question_length, responseBody.answers[0].answer))
+		yield put(getQuestionSuccess(responseBody.steps, responseBody.question_length))
 	} catch (err) {
 		yield put(getQuestionFailure(err))
 	}
@@ -58,9 +58,6 @@ export function* createQuestionSaga({ payload }) {
 
 		const options = {
 			method: 'POST',
-			query: {
-				user_id: '1'
-			},
 			body: {
 				steps,
 				answers
@@ -91,13 +88,10 @@ export function* postAnswerSaga({ payload }) {
 	try {
 		const { id, answer, timeToAnswer } = payload
 
-		const url = `${resolveApiUrl(process.env.REACT_APP_POST_ANSWER)}/${id}`
+		const url = `${resolveApiUrl(process.env.REACT_APP_POST_ANSWER)}/1`
 
 		const options = {
 			method: 'POST',
-			query: {
-				user_id: 1
-			},
 			body: {
 				time_answer: `${timeToAnswer.hours}:${timeToAnswer.minutes}:${timeToAnswer.seconds}`,
 				guessed_answer: answer

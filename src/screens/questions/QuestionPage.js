@@ -16,9 +16,6 @@ import * as Styled from './__styles__/QuestionPage.styles'
 const QuestionPage = () => {
 	const [ index, setIndex ] = useState(1)
 	const [ answer, setAnswer ] = useState('')
-	const [ solution, setSolution ] = useState('')
-	const [ toggleSolution, setToggleSolution ] = useState(false)
-	const [ solutionToShow, setSolutionToShow ] = useState(false)
 	const [ iscorrectAnswer, setIsCorrectAnswer ] = useState(false)
 	const [ currentQuestion, setCurrentQuestion ] = useState([])
 	const [ timer, setTimer ] = useState({ isLaunched: false, time: { hours: 0, minutes: 0, seconds: 0 } })
@@ -71,14 +68,6 @@ const QuestionPage = () => {
 		setAnswer('')
 	}
 
-	const onToggleSolution = () => {
-		if (toggleSolution) {
-			setToggleSolution(false)
-		} else {
-			setToggleSolution(true)
-		}
-	}
-
 	const hours = timer.time.hours < 10 ? `0${timer.time.hours}` : `${timer.time.hours}`
 	const minutes = timer.time.minutes < 10 ? `0${timer.time.minutes}` : `${timer.time.minutes}`
 	const seconds = timer.time.seconds < 10 ? `0${timer.time.seconds}` : `${timer.time.seconds}`
@@ -123,16 +112,6 @@ const QuestionPage = () => {
 													😥
 												</span>
 											</Styled.ErrorMessage>
-											{!toggleSolution ? (
-												<Styled.ToggleSolution onClick={onToggleSolution}>
-													Du mal à trouver la réponse ? Tu peux cliquer ici{' '}
-													<span role="img" aria-label="emoji">
-														🙋
-													</span>
-												</Styled.ToggleSolution>
-											) : (
-												<div>{data.solution}</div>
-											)}
 										</div>
 									) : (
 										!isNil(data.isCorrectAnswer) && <div>Félicitations</div>

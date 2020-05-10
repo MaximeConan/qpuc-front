@@ -14,25 +14,28 @@ import Main from './components/Layout/MainContainer'
 import { startup } from './actions/appActions'
 
 const App = () => {
-
 	const dispatch = useDispatch()
 
-	useEffect(() => {
-		dispatch(startup())
-	}, [dispatch])
+	useEffect(
+		() => {
+			dispatch(startup())
+		},
+		[ dispatch ]
+	)
 
 	return (
 		<Fragment>
 			<Router>
-					<Main path="/">
-						<QuestionPage path="/question"/>
-						<PostQuestionPage path="/post-question"/>
-						<SigninPage path="/connexion"/>
-						<SignupPage path="/inscription"/>
-						<ForgetPassword path="/mot-de-passe-oublie"/>
-						<Home path="/"/>
-						<Redirect from="/*" to='/' noThrow />
-					</Main>
+				<Main path="/">
+					<QuestionPage path="/question" />
+					<PostQuestionPage path="/post-question" />
+					<SigninPage path="/connexion" />
+					<SignupPage path="/inscription" />
+					<ForgetPassword path="/mot-de-passe-oublie" />
+					<Home path="/" />
+					<Redirect from="/*" to="/" noThrow />
+				</Main>
+				<Redirect from="/*" to="/" noThrow />
 			</Router>
 		</Fragment>
 	)

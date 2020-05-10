@@ -7,7 +7,9 @@ import {
 	SIGNOUT,
 	signoutFailure,
 	signoutSuccess,
-	POST_SIGNUP
+	POST_SIGNUP,
+	postSignupFailure,
+	postSignupSuccess
 } from '../actions/authActions'
 import { request, REQUEST_SUCCESS, REQUEST_FAILURE } from '../actions/apiActions'
 import { resolveApiUrl } from '../utils/apiUtils'
@@ -96,9 +98,9 @@ export function* signupSaga({ payload }) {
 
 		yield put(navigateTo('/connexion'))
 
-		yield put(postSigninSuccess(responseBody))
+		yield put(postSignupSuccess(responseBody))
 	} catch (err) {
-		yield put(postSigninFailure(err))
+		yield put(postSignupFailure(err))
 	}
 }
 

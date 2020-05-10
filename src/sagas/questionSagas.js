@@ -58,6 +58,9 @@ export function* createQuestionSaga({ payload }) {
 
 		const options = {
 			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
 			body: {
 				steps,
 				answers

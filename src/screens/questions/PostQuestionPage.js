@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { isEmpty } from 'lodash'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { FileAddOutlined, DeleteOutlined, InfoCircleOutlined } from '@ant-design/icons'
 import { Tooltip } from 'antd'
 
@@ -9,10 +9,15 @@ import Input from '../../components/Input/Input'
 import LeftContainer from '../../components/Layout/LeftContainer'
 import RightContainer from '../../components/Layout/RightContainer'
 import GlobalContainer from '../../components/Layout/GlobalContainer'
+import Alert from '../../components/Alert/Alert'
 
 import useBreakpoint from '../../hooks/useBreakpoint'
 import { SM, MD } from '../../enums/breakpointsTypes'
 import { createQuestion } from '../../actions/questionActions'
+
+import { selectFormStatus } from '../../selectors/questionSelectors'
+
+import { SUCCESS, FAILURE } from '../../enums/alertTypes'
 
 import * as Styled from './__styles__/PostQuestionPage.styles'
 
@@ -23,6 +28,8 @@ const PostQuestionPage = () => {
 
 	const breakpoint = useBreakpoint()
 	const dispatch = useDispatch()
+
+	const formStatus = useSelector(selectFormStatus)
 
 	const onAddStepClick = (e, indice) => {
 		e.preventDefault()
@@ -158,6 +165,16 @@ const PostQuestionPage = () => {
 					<h4>Vous êtes prêt à publier votre question ?</h4>
 					<Button label="Publier ma question" onClick={onPostQuestion} />
 				</Styled.Tips>
+				{formStatus === SUCCESS && (
+					<Alert
+						type={SUCCESS}
+						title="Votre question a bien été envoyée"
+						description="Merci pour votre participation !"
+					/>
+				)}
+				{formStatus === FAILURE && (
+					<Alert type={FAILURE} title="Erreur lors de l'envoie" description="Merci de rééessayer" />
+				)}
 			</RightContainer>
 		</GlobalContainer>
 	)

@@ -45,22 +45,17 @@ export function* singinSaga({ payload }) {
 		})
 
 		if (failure) {
+			console.log('COUCOU')
 			throw new Error(failure.payload.error)
 		}
 
 		const { payload: { responseBody: { access_token: token } } } = success
 
 		/**** TOKEN STORAGE ****/
-		if (token) {
-			yield put(storeToken(token))
-			yield take(STORE_TOKEN_SUCCESS)
+		yield put(storeToken(token))
+		yield take(STORE_TOKEN_SUCCESS)
 
-			yield put(navigateTo('/question'))
-
-			yield put(postSigninSuccess())
-		} else {
-			yield put(postSigninFailure())
-		}
+		yield put(navigateTo('/question'))
 
 		yield put(postSigninSuccess())
 	} catch (err) {

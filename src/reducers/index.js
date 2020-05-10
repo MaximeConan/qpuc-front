@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux'
 
 import appReducers from './appReducers'
-import userReducers from './userReducers'
-import tokenReducers from './tokenReducers'
+import authReducers from './authReducers'
 import questionReducers from './questionReducers'
+import tokenReducers from './tokenReducers'
+import userReducers from './userReducers'
 
 export default combineReducers({
-  app: appReducers,
-  user: userReducers,
-  token: tokenReducers,
-  question: questionReducers
+	app: appReducers,
+	auth: authReducers,
+	question: questionReducers,
+	token: tokenReducers,
+	user: userReducers
 })

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { isNil } from 'lodash'
 
 import { getQuestion, postAnswer } from '../../actions/questionActions'
-import { selectQuestion, selectIsLoading } from '../../selectors/questionSelectors'
+import { selectQuestion, selectIsLoading, selectFormStatus } from '../../selectors/questionSelectors'
 
 import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
@@ -23,10 +23,11 @@ const QuestionPage = () => {
 	const dispatch = useDispatch()
 	const data = useSelector(selectQuestion)
 	const isLoading = useSelector(selectIsLoading)
+	const formStatus = useSelector(selectFormStatus)
 
 	useEffect(
 		() => {
-			dispatch(getQuestion(1))
+			dispatch(getQuestion())
 		},
 		[ dispatch ]
 	)
@@ -62,9 +63,11 @@ const QuestionPage = () => {
 		[ timer ]
 	)
 
+	console.log(currentQuestion)
+
 	const onAnswerSubmit = (e) => {
 		e.preventDefault()
-		dispatch(postAnswer(1, answer, timer.time))
+		dispatch(postAnswer(data.id, answer, timer.time))
 		setAnswer('')
 	}
 

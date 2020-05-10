@@ -17,11 +17,12 @@ export const getQuestion = (id) => ({
 	}
 })
 
-export const getQuestionSuccess = (question, questionLength) => ({
+export const getQuestionSuccess = (question, questionLength, id) => ({
 	type: GET_QUESTION_SUCCESS,
 	payload: {
 		question,
-		questionLength
+		questionLength,
+		id
 	}
 })
 

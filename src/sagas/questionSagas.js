@@ -19,15 +19,9 @@ export function* watchGetQuestionSaga() {
 
 export function* getQuestionSaga({ payload }) {
 	try {
-		const { id } = payload
-
 		const url = `${resolveApiUrl(process.env.REACT_APP_GET_QUESTION)}`
 
-		const options = {
-			query: {
-				user_id: id
-			}
-		}
+		const options = {}
 
 		yield put(request(url, options, 'get_question'))
 		const { success, failure } = yield race({
@@ -40,7 +34,8 @@ export function* getQuestionSaga({ payload }) {
 		}
 
 		const { payload: { responseBody } } = success
-		yield put(getQuestionSuccess(responseBody.steps, responseBody.question_length))
+		console.log('responseBody', responseBody)
+		yield put(getQuestionSuccess(responseBody.steps, responseBody.question_length, responseBody.id))
 	} catch (err) {
 		yield put(getQuestionFailure(err))
 	}
@@ -90,8 +85,8 @@ export function* watchPostAnswerSaga() {
 export function* postAnswerSaga({ payload }) {
 	try {
 		const { id, answer, timeToAnswer } = payload
-
-		const url = `${resolveApiUrl(process.env.REACT_APP_POST_ANSWER)}/1`
+		console.log('saga', id)
+		const url = `${resolveApiUrl(process.env.REACT_APP_POST_ANSWER)}/${id}`
 
 		const options = {
 			method: 'POST',
